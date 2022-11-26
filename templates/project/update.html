@@ -1,0 +1,18 @@
+{% extends 'project/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-8 offset-2">
+        <h4 class="alert alert-info>Update Content">Update Your Information</h4> 
+
+
+        <form action="" method="POSt">
+            {% csrf_token %}
+            {{form.as_p}} <br>
+            <input type="submit" class="btn btn-info" value="Update">
+            <a href="{% url 'Library:addata'  %}" class="btn btn-success">Back to Home</a>
+        </form>
+    </div>
+    
+</div>
+{% endblock %}

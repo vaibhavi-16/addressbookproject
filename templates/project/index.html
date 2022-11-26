@@ -1,0 +1,55 @@
+{% extends 'project/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+<div class="row">
+    <div class="row col-sm-4">
+        <h4 class="text-center alert alert-warning">Add New Address</h4>
+
+<form action="" method="POST">
+    {% csrf_token %}
+   {{form.as_p}} <br>
+   <input type="submit" class="btn btn-success" value="Add " style="margin-left: 0px; padding: 10px 30px;" >
+</form>
+</div>
+<div class="col-sm-7 offset-1">
+    <h4 class="text-center alert alert-warning"> Your Address Details</h4>
+    {% if result %}
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Person Name</th>
+            <th scope="col">City Name</th>
+            <th scope="col">State Name</th>
+            <th scope="col">Mobile Number</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for st in result %}
+          <tr>
+            <th scope="row">{{st.id}}</th>
+            <td>{{st.name}}</td>
+            <td>{{st.city}}</td>
+            <td>{{st.state}}</td>
+            <td>{{st.mbno}}</td>
+            <td>
+                <a href="{% url 'Library:update_data' st.id %}" class="btn btn-warning btn-sm">Update</a>
+                <form action=" {% url 'Library:delete_data' st.id %} " method="post"  style="display: inline;">{% csrf_token %}
+                    <input type="submit" class="btn btn-danger" value="Delete">
+                </form>
+            </td>
+          </tr>
+         {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+    <h1 class="text-center alert alert-warning"> No data</h1>
+    {% endif %}
+
+    
+</div>
+</div>
+</div>
+{% endblock %}
